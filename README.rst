@@ -1,5 +1,5 @@
 ====================
-日本のZipcode用Shell for CakePHP
+Zipcode Shell for CakePHP (Japanese)
 ====================
 
 ---------------
