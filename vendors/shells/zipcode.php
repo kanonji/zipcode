@@ -85,10 +85,10 @@ class ZipcodeShell extends Shell{
                 'id' => $recode[2],
                 'prefecture' => $recode[6],
                 'city' => $recode[7],
-                'block_number' => $recode[8],
+                'town' => $recode[8],
                 'prefecture_ruby' => mb_convert_kana($recode[3]),
                 'city_ruby' => mb_convert_kana($recode[4]),
-                'block_number_ruby' => mb_convert_kana($recode[5]),
+                'town_ruby' => mb_convert_kana($recode[5]),
                 'jiscode' => $recode[0],
             );
             $this->Zipcode->create();
@@ -107,7 +107,8 @@ class ZipcodeShell extends Shell{
                 'id' => $recode[7],
                 'prefecture' => $recode[3],
                 'city' => $recode[4],
-                'block_number' => $recode[5].$recode[6],
+                'town' => $recode[5],
+                'block_number' => $recode[6],
                 'jiscode' => $recode[0],
             );
         }
