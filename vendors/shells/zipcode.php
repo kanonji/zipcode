@@ -41,6 +41,7 @@ class ZipcodeShell extends Shell{
             default:
                 $this->out(__('You have made an invalid selection. Please choose a command to execute by entering I, D, P, C, J, H, or Q.', true));
         }
+        $this->out();
         $this->hr();
         $this->main();
     }
@@ -116,7 +117,7 @@ class ZipcodeShell extends Shell{
     }
     
     public function json(){
-        $this->out(__('Not implimented yet', 2));
+        $this->out(__('Not implimented yet', true));
     }
     
     public function help(){
