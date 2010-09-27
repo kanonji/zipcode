@@ -9,17 +9,25 @@ class ZipcodeShell extends Shell{
         $this->hr();
         $this->out(__('[I]nitialize zipcodes database table', true));
         $this->out(__('[D]ownload csv and save to zipcodes table', true));
+        $this->out(__('[P] Generate prefecture.php for Configure', true));
+        $this->out(__('[C] Generate city.php for Configure', true));
         $this->out(__('[J]SON for AjaxZip(not yet)', true));
         $this->out(__('[H]elp', true));
         $this->out(__('[Q]uit', true));
 
-        $choice = strtolower($this->in(__('What would you like to do?', true), array('I', 'D', 'J', 'H', 'Q')));
+        $choice = strtolower($this->in(__('What would you like to do?', true), array('I', 'D', 'P', 'C', 'J', 'H', 'Q')));
         switch ($choice) {
             case 'i':
                 $this->initdb();
                 break;
             case 'd':
                 $this->download();
+                break;
+            case 'p':
+                $this->configurePrefecture();
+                break;
+            case 'c':
+                $this->configureCity();
                 break;
             case 'j':
                 $this->json();
@@ -31,7 +39,7 @@ class ZipcodeShell extends Shell{
                 exit(0);
                 break;
             default:
-                $this->out(__('You have made an invalid selection. Please choose a command to execute by entering I, D, J, H, or Q.', true));
+                $this->out(__('You have made an invalid selection. Please choose a command to execute by entering I, D, P, C, J, H, or Q.', true));
         }
         $this->hr();
         $this->main();
@@ -59,6 +67,52 @@ class ZipcodeShell extends Shell{
         $this->Zipcode->deleteAll('1 = 1', false);
         $this->save();
         $this->saveBulk();
+    }
+    
+    public function configurePrefecture(){
+        $target = realpath(APP.'/config/prefecture.php');
+        $source = dirname(dirname(dirname(__FILE__))).'/config/prefecture.php';
+        if(file_exists($target)){
+            $this->out(__('prefecture.php exists already at...', true));
+            $this->out($target,2);
+            $this->out(__('You can rename and copy this file...', true));
+            $this->out($source);
+            return;
+        }
+        if(false === copy($source, $target)){
+            $this->out(__('Something wrong to copy a file', true));
+            return;
+        }
+        $this->out(__('prefecture.php is copied to...', true));
+        $this->out($target);
+    }
+    
+    public function configureCity(){
+        $options['group'] = 'city';
+        $options['fields'] = array('jiscode', 'city');
+        $results = $this->Zipcode->find('all', $options);
+        foreach($results as $item){
+            $array[$item['Zipcode']['jiscode']] = $item['Zipcode']['city'];
+        }
+        $array = var_export($array, true);
+        $code = "<?php\n\$config['city'] = {$array}";
+        $target = realpath(APP.'/config/city.php');
+        $file = new File(TMP.'city_'.time().'.php', true);
+        $file->write($code);
+        if(file_exists($target)){
+            $this->out(__('city.php exists already at...', true));
+            $this->out($target,2);
+            $this->out(__('File for Configure is written.', true));
+            $this->out(__('You can rename and move this file...', true));
+            $this->out($file->pwd());
+        } else {
+            if(false === rename($file->pwd(),$target)){
+                $this->out(__('Something wrong to move a file', true));
+                return;
+            }
+            $this->out(__('city.php is written to...', true));
+            $this->out($target);
+        }
     }
     
     public function json(){
@@ -186,4 +240,4 @@ class ZipcodeShell extends Shell{
         $str = mb_convert_encoding($str, mb_internal_encoding(), $encoding);
         return file_put_contents(TMP.'ken_all.csv', $str);
     }
-}
+}'
