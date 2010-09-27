@@ -38,7 +38,7 @@ Zipcode Shell for CakePHP (Japanese)
 - PHP5
 - mbstring
 - lhaコマンド(Optional)
--- 解凍済みファイルを置く事で一応は回避可能
+ - 解凍済みファイルを置く事で一応は回避可能
 - nkf(Optional)
 - memory_limit = 20M; 程度以上
 ---------------
