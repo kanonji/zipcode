@@ -96,7 +96,7 @@ class ZipcodeShell extends Shell{
             $array[$item['Zipcode']['jiscode']] = $item['Zipcode']['city'];
         }
         $array = var_export($array, true);
-        $code = "<?php\n\$config['city'] = {$array}";
+        $code = "<?php\n\$config['city'] = {$array};";
         $target = realpath(APP.'/config/city.php');
         $file = new File(TMP.'city_'.time().'.php', true);
         $file->write($code);
