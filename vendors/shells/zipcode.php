@@ -65,6 +65,21 @@ class ZipcodeShell extends Shell{
         $this->out(__('Not implimented yet', 2));
     }
     
+    public function help(){
+        $this->hr();
+        $this->out(__('Zipcode Shell:', true));
+        $this->hr();
+        $this->out(__('Description..................................', true));
+        $this->out(__('.....................................Not yet.', true));
+        $this->hr();
+        $this->out(__('usage:', true));
+        $this->out('   cake zipcode help');
+        $this->out('   cake zipcode initdb [-datasource custom]');
+        $this->out('   cake zipcode download');
+        $this->out();
+        $this->hr();
+    }
+    
     private function getCsv(){
         system("cd ".TMP."; php -r 'readfile(\"http://www.post.japanpost.jp/zipcode/dl/kogaki/lzh/ken_all.lzh\");' | lha x -");
     }
