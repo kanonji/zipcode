@@ -131,6 +131,8 @@ class ZipcodeShell extends Shell{
         $this->out('   cake zipcode help');
         $this->out('   cake zipcode initdb [-datasource custom]');
         $this->out('   cake zipcode download');
+        $this->out('   cake zipcode configurePrefecture');
+        $this->out('   cake zipcode configureCity');
         $this->out();
         $this->hr();
     }
