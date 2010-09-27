@@ -240,4 +240,4 @@ class ZipcodeShell extends Shell{
         $str = mb_convert_encoding($str, mb_internal_encoding(), $encoding);
         return file_put_contents(TMP.'ken_all.csv', $str);
     }
-}'
+}
