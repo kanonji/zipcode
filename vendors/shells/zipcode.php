@@ -104,7 +104,7 @@ class ZipcodeShell extends Shell{
                 'prefecture_ruby' => mb_convert_kana($recode[3]),
                 'city_ruby' => mb_convert_kana($recode[4]),
                 'town_ruby' => mb_convert_kana($recode[5]),
-                'jiscode' => $recode[0],
+                'jiscode' => sprintf("%05d",$recode[0]),
             );
             $this->Zipcode->create();
             $this->Zipcode->save($data);
@@ -124,7 +124,7 @@ class ZipcodeShell extends Shell{
                 'city' => $recode[4],
                 'town' => $recode[5],
                 'block_number' => $recode[6],
-                'jiscode' => $recode[0],
+                'jiscode' => sprintf("%05d",$recode[0]),
             );
         }
         $this->Zipcode->create();
