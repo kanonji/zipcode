@@ -5,15 +5,15 @@ class ZipcodeShell extends Shell{
     public $uses = array('Zipcode');
     
     public function main(){
-        $this->out(__('Zipcode for japan Shell', true));
+        $this->out(__d('zipcode','Zipcode for japan Shell', true));
         $this->hr();
-        $this->out(__('[I]nitialize zipcodes database table', true));
-        $this->out(__('[D]ownload csv and save to zipcodes table', true));
-        $this->out(__('[P] Generate prefecture.php for Configure', true));
-        $this->out(__('[C] Generate city.php for Configure', true));
-        $this->out(__('[J]SON for AjaxZip(not yet)', true));
-        $this->out(__('[H]elp', true));
-        $this->out(__('[Q]uit', true));
+        $this->out(__d('zipcode','[I]nitialize zipcodes database table', true));
+        $this->out(__d('zipcode','[D]ownload csv and save to zipcodes table', true));
+        $this->out(__d('zipcode','[P] Generate prefecture.php for Configure', true));
+        $this->out(__d('zipcode','[C] Generate city.php for Configure', true));
+        $this->out(__d('zipcode','[J]SON for AjaxZip(not yet)', true));
+        $this->out(__d('zipcode','[H]elp', true));
+        $this->out(__d('zipcode','[Q]uit', true));
 
         $choice = strtolower($this->in(__('What would you like to do?', true), array('I', 'D', 'P', 'C', 'J', 'H', 'Q')));
         switch ($choice) {
@@ -39,7 +39,7 @@ class ZipcodeShell extends Shell{
                 exit(0);
                 break;
             default:
-                $this->out(__('You have made an invalid selection. Please choose a command to execute by entering I, D, P, C, J, H, or Q.', true));
+                $this->out(__d('zipcode','You have made an invalid selection. Please choose a command to execute by entering I, D, P, C, J, H, or Q.', true));
         }
         $this->out();
         $this->hr();
@@ -74,17 +74,17 @@ class ZipcodeShell extends Shell{
         $target = realpath(APP.'/config/prefecture.php');
         $source = dirname(dirname(dirname(__FILE__))).'/config/prefecture.php';
         if(file_exists($target)){
-            $this->out(__('prefecture.php exists already at...', true));
+            $this->out(__d('zipcode','prefecture.php exists already at...', true));
             $this->out($target,2);
-            $this->out(__('You can rename and copy this file...', true));
+            $this->out(__d('zipcode','You can rename and copy this file...', true));
             $this->out($source);
             return;
         }
         if(false === copy($source, $target)){
-            $this->out(__('Something wrong to copy a file', true));
+            $this->out(__d('zipcode','Something wrong to copy a file', true));
             return;
         }
-        $this->out(__('prefecture.php is copied to...', true));
+        $this->out(__d('zipcode','prefecture.php is copied to...', true));
         $this->out($target);
     }
     
@@ -101,31 +101,31 @@ class ZipcodeShell extends Shell{
         $file = new File(TMP.'city_'.time().'.php', true);
         $file->write($code);
         if(file_exists($target)){
-            $this->out(__('city.php exists already at...', true));
+            $this->out(__d('zipcode','city.php exists already at...', true));
             $this->out($target,2);
-            $this->out(__('File for Configure is written.', true));
-            $this->out(__('You can rename and move this file...', true));
+            $this->out(__d('zipcode','File for Configure is written.', true));
+            $this->out(__d('zipcode','You can rename and move this file...', true));
             $this->out($file->pwd());
         } else {
             if(false === rename($file->pwd(),$target)){
-                $this->out(__('Something wrong to move a file', true));
+                $this->out(__d('zipcode','Something wrong to move a file', true));
                 return;
             }
-            $this->out(__('city.php is written to...', true));
+            $this->out(__d('zipcode','city.php is written to...', true));
             $this->out($target);
         }
     }
     
     public function json(){
-        $this->out(__('Not implimented yet', true));
+        $this->out(__d('zipcode','Not implimented yet', true));
     }
     
     public function help(){
         $this->hr();
-        $this->out(__('Zipcode Shell:', true));
+        $this->out(__d('zipcode','Zipcode Shell:', true));
         $this->hr();
-        $this->out(__('Description..................................', true));
-        $this->out(__('.....................................Not yet.', true));
+        $this->out(__d('zipcode','Description..................................', true));
+        $this->out(__d('zipcode','.....................................Not yet.', true));
         $this->hr();
         $this->out(__('usage:', true));
         $this->out('   cake zipcode help');
